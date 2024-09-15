@@ -42,7 +42,9 @@ SELECT ROUND(AVG(MAU),2) avg_MAU
 FROM (SELECT to_char(event_time, ’YYYY-MM’) months, COUNT(DISTINCT user_id) MAU
              FROM sessions
              GROUP BY months)
+	
 --Рассчитываем DAU 
+	
 SELECT to_char(event_time,’YYYY-MM-DD’) days,
               COUNT(DISTINCT user_id) DAU
 FROM sessions
@@ -53,7 +55,7 @@ GROUP BY days
 SELECT ROUND(AVG(DAU),2) avg_DAU
 FROM (SELECT to_char(event_time,’YYYY-MM-DD’) days, COUNT(DISTINCT user_id) DAU
             FROM sessions
-            GROUP BY days 
+            GROUP BY days)
 
 --WAU
 SELECT DATE_PART('week', event_time) week,
@@ -91,18 +93,6 @@ ad as (SELECT ROUND(AVG(DAU),2) avg_DAU
 
 SELECT ROUND(avg_dau/avg_mau*100.0,2) sticky_factor
 FROM am, ad
-
---
-
-SELECT product_id,
-       ROUND(SUM(price)::numeric, 2) total,
-       (SELECT ROUND(SUM(price)::numeric,2) grand_total       
-        FROM sessions 
-        WHERE event_type = 'purchase')
-FROM sessions 
-WHERE event_type = 'purchase'
-GROUP BY product_id
-ORDER BY total DESC
 
 --Посчитаем количество раз каждый продукт был куплен, а также суммарную прибыль для каждого продукта (важно помнить, что для некоторых продуктов сумма покупок может быть нулевой, поэтому необходимо применить JOIN cо списком id всех продуктов)
 
