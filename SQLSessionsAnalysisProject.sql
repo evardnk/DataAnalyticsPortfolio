@@ -15,15 +15,9 @@ price REAL,
 user_id VARCHAR,
 user_session PRIMARY KEY 
 )
---проверяем наличие пустых значений
-SELECT * FROM sessions
-WHERE  category_id IS NULL OR
-               event_type IS NULL OR 
-               product_id IS NULL OR
-               category_id IS NULL OR
-               user_id IS NULL OR
-               user_session IS NULL
+
 --Считаем для скольки дней из каждого месяца у нас есть данные
+	
 SELECT 
     COUNT(DISTINCT to_char(event_time,’YYYY-MM-DD’) ) days_of_month,
     to_char(event_time,’YYYY-MM’) as month
