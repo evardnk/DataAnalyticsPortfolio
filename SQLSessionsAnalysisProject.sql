@@ -90,9 +90,41 @@ ad as (SELECT ROUND(AVG(DAU),2) avg_DAU
                   GROUP BY days 
 )
      )
+	
 
 SELECT ROUND(avg_dau/avg_mau*100.0,2) sticky_factor
 FROM am, ad
+
+--Расчет ARPU и сохраненние его в VIEW для дальнейшего расчета LTV
+	
+CREATE VIEW ARPU_calc as (	
+with rev as (
+	SELECT SUM(price)::numeric total_revenue
+    FROM sessions
+    WHERE event_type='purchase'
+),
+
+duc as (
+	SELECT COUNT (DISTINCT user_id) total_user_count
+    FROM sessions
+)
+
+SELECT ROUND(rev.total_revenue/duc.total_user_count, 2) ARPU
+FROM rev,duc
+)
+
+--Расчет LTV оснонованный на среднем lifetime пользователя и ранее посчитанном ARPU
+	
+with lifetime AS (
+    SELECT 
+        user_id,
+        MAX(event_time::date) - MIN(event_time::date) diff  
+    FROM sessions 
+    GROUP BY user_id
+)
+SELECT ARPU*(SELECT AVG(diff) avg_lifetime
+             FROM lifetime) LTV
+FROM ARPU_calc
 
 --Посчитаем количество раз каждый продукт был куплен, а также суммарную прибыль для каждого продукта (важно помнить, что для некоторых продуктов сумма покупок может быть нулевой, поэтому необходимо применить JOIN cо списком id всех продуктов)
 
@@ -193,7 +225,7 @@ SELECT *,
 FROM cf
 )
 
---соединим результаты и сохраним их в таблицу для дальнейшего анализа будущем 
+--соединим результаты и сохраним их в таблицу для дальнейшего анализа в будущем 
 
 CREATE TABLE abc_xyz_class as(
 SELECT a.product_id,
