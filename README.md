@@ -8,13 +8,13 @@
 
 Ссылка на таблицу облачном хранилище: https://dbs.timeweb.com/?pgsql=85.193.89.81&username=gen_user&db=default_db&ns=public&select=weather_forcast_5day
 
-[Jupyer Notebook файл кода](WeatherData.ipynb)
+[Код,Jupyter Notebook](WeatherData.ipynb)
 
 ### Проект№2: Расчет продуктовых метрик и когортный анализ для онлайн магазина электороники
 В данном проекте я рассчитала такие ключевые продуктовые метрики как MAU, WAU, DAU sticky factor, ARPU и LTV с помощью PostgreSQL. Провела ABC-XYZ анализ продуктов, а также когортный анализ retention.
 
 Инструменты: CTEs, Views, joins, Window Functions, Aggregate Functions, Type convertion
 
-Код:
+[Код, Jupyter Notebook](SQLSessionsAnalysisProject.sql)
 
 
