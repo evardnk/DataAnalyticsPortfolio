@@ -6,7 +6,7 @@
 
 Инструменты/навыки: Pandas, Numpy, Api, requests, data cleaning, PostgreSQL, PowerBI, Jupyter Notebook, Jupyter Lab
 
-Ссылка на таблицу в облачном хранилище: https://dbs.timeweb.com/?pgsql=85.193.89.81&username=gen_user&db=default_db&ns=public&select=weather_forcast_5day
+Ссылка на таблицу в облачном хранилище: https://dbs.timeweb.com/?pgsql=85.193.89.81&username=gen_user&password=Stpof3552&db=default_db&ns=public&select=weather_forcast_5day
 
 
 [Дашборд в PowerBI](Weather5DayForcastDashboard.pbix)
