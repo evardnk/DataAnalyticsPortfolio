@@ -14,6 +14,8 @@
 
 [Код, Jupyter Notebook](WeatherData.ipynb)
 
+![WeatherForcastDashboardScreenshot](https://github.com/user-attachments/assets/8a5c452f-af9a-4e9c-a543-b474c4724209)
+
 ### Проект№2: Расчет продуктовых метрик и когортный анализ для онлайн магазина электороники
 В данном проекте я рассчитала такие ключевые продуктовые метрики как MAU, WAU, DAU sticky factor, ARPU и LTV с помощью PostgreSQL. Провела ABC-XYZ анализ продуктов, а также когортный анализ retention.
 
